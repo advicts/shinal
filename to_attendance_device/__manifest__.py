@@ -127,7 +127,7 @@ Hỗ trợ TCP / IP, v.v.) sau đó chúng tôi tích hợp vào Odoo bằng ứ
     'version': '1.1.2',
 
     # any module necessary for this one to work correctly
-    'depends': ['hr_attendance', 'to_base', 'to_safe_confirm_button'],
+#     'depends': ['hr_attendance', 'to_base', 'to_safe_confirm_button'],
 
     # always loaded
     'data': [
