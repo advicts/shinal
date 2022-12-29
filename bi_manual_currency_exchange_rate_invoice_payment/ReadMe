@@ -1,0 +1,4 @@
+15.0.0.1 ==>fixed issue of tax in journal while manual exchange.
+
+
+15.0.0.2 ==> Fixed issue if we create two bills with the same vendor and then Go to the list view, checkmark both 					bills, click Register Payment
