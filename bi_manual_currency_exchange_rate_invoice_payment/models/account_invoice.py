@@ -323,21 +323,22 @@ class account_invoice(models.Model):
     
     @api.onchange('manual_currency_rate')
     def _onchange_amount_currency(self):
-        for line in self.line_ids:
-            company = line.move_id.company_id
-            if line.move_id.manual_currency_rate > 0:
-                currency_rate = line.company_id.currency_id.rate / line.move_id.manual_currency_rate
-                # currency_rate =  line.move_id.manual_currency_rate
-                balance = line.amount_currency*currency_rate
-            else:
-                balance = line.currency_id._convert(line.amount_currency, company.currency_id, company, line.move_id.date or fields.Date.context_today(line))
-            line.debit = balance if balance > 0.0 else 0.0
-            line.credit = -balance if balance < 0.0 else 0.0
+        if self.manual_currency_rate_active:
+            for line in self.line_ids:
+                company = line.move_id.company_id
+                if line.move_id.manual_currency_rate > 0:
+                    currency_rate = line.company_id.currency_id.rate / line.move_id.manual_currency_rate
+                    # currency_rate =  line.move_id.manual_currency_rate
+                    balance = line.amount_currency*currency_rate
+                else:
+                    balance = line.currency_id._convert(line.amount_currency, company.currency_id, company, line.move_id.date or fields.Date.context_today(line))
+                line.debit = balance if balance > 0.0 else 0.0
+                line.credit = -balance if balance < 0.0 else 0.0
 
-            if not line.move_id.is_invoice(include_receipts=True):
-                continue
+                if not line.move_id.is_invoice(include_receipts=True):
+                    continue
 
-            line.update(line._get_fields_onchange_balance())
-            line.update(line._get_price_total_and_subtotal())
+                line.update(line._get_fields_onchange_balance())
+                line.update(line._get_price_total_and_subtotal())
 
 # # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
