@@ -47,12 +47,11 @@ class account_invoice_line(models.Model):
             'amount_currency': amount_currency,
             'currency_id': currency.id,
             'debit': balance > 0.0 and balance or 0.0,
-            'credit': 1200,
-            # 'credit': balance < 0.0 and -balance or 0.0,
+            'credit': balance < 0.0 and -balance or 0.0,
         }
 
 
-    @api.onchange('amount_currency')
+    @api.onchange('amount_currency','product_id','product_uom_id')
     def _onchange_amount_currency(self):
         for line in self:
             company = line.move_id.company_id
@@ -72,64 +71,64 @@ class account_invoice_line(models.Model):
             line.update(line._get_price_total_and_subtotal())
 
 
-    @api.onchange('product_id')
-    def _onchange_product_id(self):
-        for line in self:
-            if not line.product_id or line.display_type in ('line_section', 'line_note'):
-                continue
+    # @api.onchange('product_id')
+    # def _onchange_product_id(self):
+    #     for line in self:
+    #         if not line.product_id or line.display_type in ('line_section', 'line_note'):
+    #             continue
 
-            line.name = line._get_computed_name()
-            line.account_id = line._get_computed_account()
-            taxes = line._get_computed_taxes()
-            if taxes and line.move_id.fiscal_position_id:
-                taxes = line.move_id.fiscal_position_id.map_tax(taxes)
-            line.tax_ids = taxes
-            line.product_uom_id = line._get_computed_uom()
-            line.price_unit = line._get_computed_price_unit()
+    #         line.name = line._get_computed_name()
+    #         line.account_id = line._get_computed_account()
+    #         taxes = line._get_computed_taxes()
+    #         if taxes and line.move_id.fiscal_position_id:
+    #             taxes = line.move_id.fiscal_position_id.map_tax(taxes)
+    #         line.tax_ids = taxes
+    #         line.product_uom_id = line._get_computed_uom()
+    #         line.price_unit = line._get_computed_price_unit()
 
-            # price_unit and taxes may need to be adapted following Fiscal Position
-            line._set_price_and_tax_after_fpos()
+    #         # price_unit and taxes may need to be adapted following Fiscal Position
+    #         line._set_price_and_tax_after_fpos()
 
-            # # Convert the unit price to the invoice's currency.
-            company = line.move_id.company_id
+    #         # # Convert the unit price to the invoice's currency.
+    #         company = line.move_id.company_id
             
-            if line.move_id.manual_currency_rate_active:
-                # currency_rate = line.move_id.manual_currency_rate/company.currency_id.rate
-                currency_rate = line.move_id.manual_currency_rate
-                if line.move_id.is_sale_document(include_receipts=True):
-                    price_unit = line.product_id.lst_price
-                elif line.move_id.is_purchase_document(include_receipts=True):
-                    price_unit = line.product_id.standard_price
-                else:
-                    return 0.0
-                manual_currency_rate = price_unit * currency_rate
-                line.price_unit = manual_currency_rate
+    #         if line.move_id.manual_currency_rate_active:
+    #             # currency_rate = line.move_id.manual_currency_rate/company.currency_id.rate
+    #             currency_rate = line.move_id.manual_currency_rate
+    #             if line.move_id.is_sale_document(include_receipts=True):
+    #                 price_unit = line.product_id.lst_price
+    #             elif line.move_id.is_purchase_document(include_receipts=True):
+    #                 price_unit = line.product_id.standard_price
+    #             else:
+    #                 return 0.0
+    #             manual_currency_rate = price_unit * currency_rate
+    #             line.price_unit = manual_currency_rate
 
 
 
-    @api.onchange('product_uom_id')
-    def _onchange_uom_id(self):
-        ''' Recompute the 'price_unit' depending of the unit of measure. '''
-        if self.display_type in ('line_section', 'line_note'):
-            return
-        taxes = self._get_computed_taxes()
-        if taxes and self.move_id.fiscal_position_id:
-            taxes = self.move_id.fiscal_position_id.map_tax(taxes)
-        self.tax_ids = taxes
-        self.price_unit = self._get_computed_price_unit()
-        company = self.move_id.company_id
+    # @api.onchange('product_uom_id')
+    # def _onchange_uom_id(self):
+    #     ''' Recompute the 'price_unit' depending of the unit of measure. '''
+    #     if self.display_type in ('line_section', 'line_note'):
+    #         return
+    #     taxes = self._get_computed_taxes()
+    #     if taxes and self.move_id.fiscal_position_id:
+    #         taxes = self.move_id.fiscal_position_id.map_tax(taxes)
+    #     self.tax_ids = taxes
+    #     self.price_unit = self._get_computed_price_unit()
+    #     company = self.move_id.company_id
 
-        if self.move_id.manual_currency_rate_active:
-            # currency_rate = self.move_id.manual_currency_rate/company.currency_id.rate
-            currency_rate = self.move_id.manual_currency_rate
-            if self.move_id.is_sale_document(include_receipts=True):
-                price_unit = self.product_id.lst_price
-            elif self.move_id.is_purchase_document(include_receipts=True):
-                price_unit = self.product_id.standard_price
-            else:
-                return 0.0
-            manual_currency_rate = price_unit * currency_rate
-            self.price_unit = manual_currency_rate
+    #     if self.move_id.manual_currency_rate_active:
+    #         # currency_rate = self.move_id.manual_currency_rate/company.currency_id.rate
+    #         currency_rate = self.move_id.manual_currency_rate
+    #         if self.move_id.is_sale_document(include_receipts=True):
+    #             price_unit = self.product_id.lst_price
+    #         elif self.move_id.is_purchase_document(include_receipts=True):
+    #             price_unit = self.product_id.standard_price
+    #         else:
+    #             return 0.0
+    #         manual_currency_rate = price_unit * currency_rate
+    #         self.price_unit = manual_currency_rate
           
           
         
