@@ -32,7 +32,8 @@ class account_invoice_line(models.Model):
 
         if self.move_id.manual_currency_rate_active:
             if self.move_id.manual_currency_rate > 0:
-                currency_rate = self.company_id.currency_id.rate / self.move_id.manual_currency_rate
+                # currency_rate = self.company_id.currency_id.rate / self.move_id.manual_currency_rate
+                currency_rate = self.move_id.manual_currency_rate
                 balance = amount_currency*currency_rate
             else:
                 balance = currency._convert(amount_currency, company.currency_id, company,
@@ -55,6 +56,7 @@ class account_invoice_line(models.Model):
         for line in self:
             company = line.move_id.company_id
             if line.move_id.manual_currency_rate > 0:
+                # currency_rate = line.company_id.currency_id.rate / line.move_id.manual_currency_rate
                 currency_rate = line.company_id.currency_id.rate / line.move_id.manual_currency_rate
                 balance = line.amount_currency*currency_rate
             else:
@@ -91,7 +93,8 @@ class account_invoice_line(models.Model):
             company = line.move_id.company_id
             
             if line.move_id.manual_currency_rate_active:
-                currency_rate = line.move_id.manual_currency_rate/company.currency_id.rate
+                # currency_rate = line.move_id.manual_currency_rate/company.currency_id.rate
+                currency_rate = line.move_id.manual_currency_rate
                 if line.move_id.is_sale_document(include_receipts=True):
                     price_unit = line.product_id.lst_price
                 elif line.move_id.is_purchase_document(include_receipts=True):
@@ -116,7 +119,8 @@ class account_invoice_line(models.Model):
         company = self.move_id.company_id
 
         if self.move_id.manual_currency_rate_active:
-            currency_rate = self.move_id.manual_currency_rate/company.currency_id.rate
+            # currency_rate = self.move_id.manual_currency_rate/company.currency_id.rate
+            currency_rate = self.move_id.manual_currency_rate
             if self.move_id.is_sale_document(include_receipts=True):
                 price_unit = self.product_id.lst_price
             elif self.move_id.is_purchase_document(include_receipts=True):
@@ -272,7 +276,8 @@ class account_invoice(models.Model):
                 continue
             if self.manual_currency_rate_active:
                 if self.manual_currency_rate:
-                    currency_rate = self.company_id.currency_id.rate/self.manual_currency_rate
+                    # currency_rate = self.company_id.currency_id.rate/self.manual_currency_rate
+                    currency_rate = self.manual_currency_rate
                     balance = taxes_map_entry['amount'] * currency_rate
                 else:
                     raise ValidationError(_("Please define Rate value."))

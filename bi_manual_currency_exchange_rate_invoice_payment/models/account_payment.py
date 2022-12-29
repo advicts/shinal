@@ -217,7 +217,8 @@ class AccountPayment(models.Model):
 
         if self.manual_currency_rate_active:
             if self.manual_currency_rate:
-                currency_rate = self.company_id.currency_id.rate / self.manual_currency_rate
+                # currency_rate = self.company_id.currency_id.rate / self.manual_currency_rate
+                currency_rate =  self.manual_currency_rate
                 liquidity_balance = liquidity_amount_currency * currency_rate            
                 counterpart_amount_currency = -liquidity_amount_currency - write_off_amount_currency            
                 write_off_balance = write_off_amount_currency * currency_rate
