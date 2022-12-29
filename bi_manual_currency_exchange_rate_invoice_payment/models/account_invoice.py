@@ -47,7 +47,8 @@ class account_invoice_line(models.Model):
             'amount_currency': amount_currency,
             'currency_id': currency.id,
             'debit': balance > 0.0 and balance or 0.0,
-            'credit': balance < 0.0 and -balance or 0.0,
+            'credit': 1200,
+            # 'credit': balance < 0.0 and -balance or 0.0,
         }
 
 
