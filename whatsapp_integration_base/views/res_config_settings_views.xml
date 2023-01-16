@@ -1,0 +1,62 @@
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.base.setup</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='languages']" position="after">
+                <div id="whatsapp_api_login">
+                    <h2>WhatsApp Chat API Login Credentials</h2>
+                    <div class="row mt16 o_settings_container" name="whatsapp_login_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="whatsapp_login_setting_container">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="mt16 row">
+                                        <label for="instance_id"
+                                               class="col-3 col-lg-3"/>
+                                        <field name="instance_id" class="oe_inline" required="0"/>
+                                    </div>
+                                    <div class="mt16 row">
+                                        <label for="whatsapp_token"
+                                               class="col-3 col-lg-3"/>
+                                        <field name="whatsapp_token" class="oe_inline" required="0"/>
+                                    </div>
+                                    <div class="mt16 row" attrs="{'invisible': [('authenticated', '=', 'fail')]}">
+                                        <label for="authenticated"
+                                               class="col-3 col-lg-3"/>
+                                        <field name="authenticated" class="font-weight-bold badge bg-success"
+                                               style="width: auto;font-size: medium;margin: auto;margin-right: 132px;"
+                                               widget="badge"/>
+                                    </div>
+
+                                    <button class="oe_highlight mt-5" name="get_qr_code" string="Get QR Code"
+                                            type="object" help="Click to get the QR Code"
+                                            attrs="{'invisible': [('authenticated', '=', 'success')]}"
+                                    />
+                                    <button class="oe_highlight mt-5" name="whatsapp_logout" string="Log Out"
+                                            type="object" help="Click to logout"
+                                            attrs="{'invisible': [('authenticated', '=', 'fail')]}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="qr_code_wizard_form" model="ir.ui.view">
+        <field name="name">Whatsapp QR Code</field>
+        <field name="model">qr.popup.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="qr_code" widget="image" readonly="1"
+                       style="display: block;margin-left: auto;margin-right: auto; width: 50%;"/>
+                <footer>
+                    <button name="check_authentication" string="Close" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

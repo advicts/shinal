@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_qr_popup_wizard,qr_popup_wizard,model_qr_popup_wizard,,1,1,1,0
+access_message_popup_wizard,message_popup_wizard,model_message_popup_wizard,,1,1,1,0

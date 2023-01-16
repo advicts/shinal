@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.base.setup</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='catalog_setting_container']" position="after">
+                    <div id="whatsapp_api_login">
+                        <h2>WhatsApp Message Configuration</h2>
+                        <div class="row mt16 o_settings_container" id="whatsapp_message_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                 id="append_signature"
+                                 title="Add signature at the end of WhatsApp message">
+                                <div class="o_setting_left_pane">
+                                    <field name="append_signature"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="append_signature"/>
+                                    <div class="text-muted">
+                                        Append Signature in the Whatsapp Message
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                 id="chatter_log">
+                                <div class="o_setting_left_pane">
+                                    <field name="chatter_log"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="chatter_log"/>
+                                    <div class="text-muted">
+                                        Log the messages in the chatter
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                 id="attachment">
+                                <div class="o_setting_left_pane">
+                                    <field name="attachment"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="attachment"/>
+                                    <div class="text-muted">
+                                        Attach Sale Order PDF Document
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                 id="message_type">
+                                <div class="o_setting_left_pane">
+
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="message_type"/>
+                                    <field name="message_type"/>
+                                    <div class="text-muted" attrs="{'invisible': [('message_type', '!=', 'short')]}">
+                                        Include Details in Message
+                                    </div>
+                                    <div class="text-muted" attrs="{'invisible': [('message_type', '!=', 'detail')]}">
+                                        Include All the Details in Message
+                                    </div>
+                                    <group attrs="{'invisible': [('message_type', '!=', 'short')]}">
+                                        <div>
+                                            <label for="include_product_details"/>
+                                            <field name="include_product_details"/>
+                                        </div>
+                                        <div>
+                                            <label for="include_payment_terms"/>
+
+                                            <field name="include_payment_terms"/>
+                                        </div>
+                                        <div>
+                                            <label for="include_total_details"/>
+                                            <field name="include_total_details"/>
+                                        </div>
+                                    </group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
