@@ -38,8 +38,9 @@ class ResConfigSettings(models.TransientModel):
         ICPSudo = self.env['ir.config_parameter'].sudo()
         instance_id = ICPSudo.get_param('whatsapp_integration_base.instance_id')
         whatsapp_token = ICPSudo.get_param('whatsapp_integration_base.whatsapp_token')
-
-        url = "https://api.chat-api.com/instance" + instance_id + "/status?token=" + whatsapp_token
+        
+        url = "https://api.green-api.com/instance" + instance_id + "/status?token=" + whatsapp_token
+#         url = "https://api.chat-api.com/instance" + instance_id + "/status?token=" + whatsapp_token
 
         response = (requests.get(url)).text
         response = json.loads(response)
@@ -59,8 +60,8 @@ class ResConfigSettings(models.TransientModel):
         ICPSudo = self.env['ir.config_parameter'].sudo()
         instance_id = ICPSudo.get_param('whatsapp_integration_base.instance_id')
         whatsapp_token = ICPSudo.get_param('whatsapp_integration_base.whatsapp_token')
-
-        url = "https://api.chat-api.com/instance" + instance_id + "/logout?token=" + whatsapp_token
+        url = "https://api.green-api.com/instance" + instance_id + "/status?token=" + whatsapp_token
+#         url = "https://api.chat-api.com/instance" + instance_id + "/logout?token=" + whatsapp_token
         response = (requests.get(url)).text
         response = json.loads(response)
         if response['result']:
@@ -76,8 +77,8 @@ class QRWizard(models.TransientModel):
         ICPSudo = self.env['ir.config_parameter'].sudo()
         instance_id = ICPSudo.get_param('whatsapp_integration_base.instance_id')
         whatsapp_token = ICPSudo.get_param('whatsapp_integration_base.whatsapp_token')
-
-        url = "https://api.chat-api.com/instance" + instance_id + "/status?token=" + whatsapp_token
+        url = "https://api.green-api.com/instance" + instance_id + "/status?token=" + whatsapp_token
+#         url = "https://api.chat-api.com/instance" + instance_id + "/status?token=" + whatsapp_token
 
         response = (requests.get(url)).text
         response = json.loads(response)
