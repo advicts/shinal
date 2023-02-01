@@ -86,10 +86,10 @@ class inherit_invoicing(models.Model):
 								"is_partially_paid": False,
 								"is_fully_paid": True
 							})
-					sale.write({
-								"advicts_amount_due": amount,
-								"advicts_amount_paid": sale.amount_total-amount,
-							})
+						sale.write({
+									"advicts_amount_due": amount,
+									"advicts_amount_paid": sale.amount_total-amount,
+								})
 					invoice.iss_invoice = True
 
 
