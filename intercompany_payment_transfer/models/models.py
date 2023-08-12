@@ -35,6 +35,7 @@ class AccountPayment(models.Model):
                 'is_intercompany_transfer': payment.is_intercompany_transfer,
                 'amount': payment.amount,
                 'journal_id': journal_id.id,
+                'currency_id': payment.currency_id.id,
                 'payment_type': payment.payment_type == 'outbound' and 'inbound' or 'outbound',
                 'move_id': None,
                 'ref': payment.ref,
