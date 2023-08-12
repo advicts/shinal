@@ -33,7 +33,6 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='favicon']" position="after">
                     <field name="journal_code"/>
-                    <field name="account_code"/>
                 </xpath>
             </field>
         </record>

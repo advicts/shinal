@@ -24,35 +24,30 @@ class AccountPayment(models.Model):
 
         for payment in self:
             company = self.env.user.company_id
-            if not payment.partner_id.ref_company_ids.journal_code or not payment.partner_id.ref_company_ids.account_code:
-                raise UserError("Please set the journal code and account code for the the company you are using to transfer money.")
+            if not payment.partner_id.ref_company_ids.journal_code:
+                raise UserError("Please set the journal code for the the company you are using to transfer money.")
             
             journal_id = self.env['account.journal'].sudo().search([('company_id', '=', payment.partner_id.ref_company_ids.id), ('code', '=', payment.partner_id.ref_company_ids.journal_code),])
-            destination_account_id = self.env['account.account'].sudo().search([('company_id', '=', payment.partner_id.ref_company_ids.id), ('code', '=', payment.partner_id.ref_company_ids.account_code),])
-            
-            paired_payment = payment.sudo().copy({
+
+            paired_payment = self.env['account.payment'].sudo().create({
                 'company_id': payment.partner_id.ref_company_ids.id,
                 'partner_id': company.partner_id.id,
-                'destination_account_id': destination_account_id.id,
+                'is_intercompany_transfer': payment.is_intercompany_transfer,
+                'amount': payment.amount,
                 'journal_id': journal_id.id,
-                'payment_type': 'outbound' if payment.payment_type == 'outbound' else 'inbound',
+                'payment_type': payment.payment_type == 'outbound' and 'inbound' or 'outbound',
                 'move_id': None,
                 'ref': payment.ref,
                 'paired_intercompany_payment_id': payment.id,
                 'date': payment.date,
             })
+
             paired_payment.move_id._post(soft=False)
             payment.paired_intercompany_payment_id = paired_payment
 
-            body = _(
-                "This payment has been created from %s",
-                payment._get_html_link(),
-            )
+            body = _('This payment has been created from <a href=# data-oe-model=account.payment data-oe-id=%d>%s</a>') % (payment.id, payment.name)
             paired_payment.message_post(body=body)
-            body = _(
-                "A second payment has been created: %s",
-                paired_payment._get_html_link(),
-            )
+            body = _('A second payment has been created: <a href=# data-oe-model=account.payment data-oe-id=%d>%s</a>') % (paired_payment.id, paired_payment.name)
             payment.message_post(body=body)
 
             lines = (payment.move_id.line_ids + paired_payment.move_id.line_ids).filtered(
@@ -64,15 +59,6 @@ class ResCompany(models.Model):
     _inherit = 'res.company'
 
     journal_code = fields.Char(string='Journal Code')
-    account_code = fields.Char(string='Account Code')
-
-    @api.constrains('account_code')
-    def _check_account_code(self):
-        for company in self:
-            if company.account_code:
-                account_code_count = self.env['account.account'].sudo().search_count([('code', '=', company.account_code), ('company_id', '=', company.id)])
-                if account_code_count < 1:
-                    raise UserError(_('There is no Account with this Code!'))
                 
     @api.constrains('journal_code')
     def _check_journal_code(self):
