@@ -13,9 +13,9 @@ class AccountPayment(models.Model):
 
     def action_post(self):
         res=super(AccountPayment, self).action_post()
-        if self.is_intercompany_transfer:
+        if self.is_intercompany_transfer and not self.paired_intercompany_payment_id:
             self._create_paired_intercompany_transfer_payment()
-     
+    
 
     def _create_paired_intercompany_transfer_payment(self):
 
@@ -30,7 +30,9 @@ class AccountPayment(models.Model):
             journal = self.env['account.journal'].sudo().search([('company_id', '=', receiver_company.id), ('code', '=', receiver_company.journal_code)], limit=1)
             if not journal:
                 raise UserError("Journal not found for the receiving company.")
-            
+            if not journal.currency_id:
+                raise UserError("Journal currency not set for the receiving company.")
+
             amount = payment.amount
             if payment.currency_id != journal.currency_id:
                 amount = journal.currency_id.sudo()._convert(amount, journal.currency_id, receiver_company.id, payment.date)

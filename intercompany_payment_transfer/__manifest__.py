@@ -3,7 +3,7 @@
     'name': "Intercompany Payment Transfer",
     'summary': """ Intercompany Payment Transfer """,
     'description': """ Intercompany Payment Transfer """,
-    'author': "Murtaja@Advicts",
+    'author': "OmarFalih@Advicts,Murtaja@Advicts",
     'website': "https://advicts.com",
     'category': 'Uncategorized',
     'version': '0.0',
