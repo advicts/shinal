@@ -30,12 +30,12 @@ class AccountPayment(models.Model):
             journal = self.env['account.journal'].sudo().search([('company_id', '=', receiver_company.id), ('code', '=', receiver_company.journal_code)], limit=1)
             if not journal:
                 raise UserError("Journal not found for the receiving company.")
-            if not journal.currency_id:
-                raise UserError("Journal currency not set for the receiving company.")
+            # if not journal.currency_id:
+            #     raise UserError("Journal currency not set for the receiving company.")
 
-            amount = payment.amount
-            if payment.currency_id != journal.currency_id:
-                amount = journal.currency_id.sudo()._convert(amount, journal.currency_id, receiver_company.id, payment.date)
+            # amount = payment.amount
+            # if payment.currency_id != journal.currency_id:
+            #     amount = journal.currency_id.sudo()._convert(amount, journal.currency_id, receiver_company.id, payment.date)
 
             paired_payment = self.env['account.payment'].sudo().create({
                 'company_id': receiver_company.id,
@@ -43,7 +43,7 @@ class AccountPayment(models.Model):
                 'is_intercompany_transfer': payment.is_intercompany_transfer,
                 'amount': payment.amount,
                 'journal_id': journal.id,
-                'currency_id': journal.currency_id.id,
+                'currency_id': payment.currency_id.id,
                 'payment_type': payment.payment_type == 'outbound' and 'inbound' or 'outbound',
                 'move_id': None,
                 'ref': payment.ref,
