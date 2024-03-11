@@ -34,7 +34,7 @@
     """,
     'depends': ['account'],
     'data': [
-                'views/account_payment_term_view.xml',
+                # 'views/account_payment_term_view.xml',
             ],
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',

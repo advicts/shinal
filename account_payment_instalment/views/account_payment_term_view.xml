@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- <record id="view_payment_term_line_tree_instalment" model="ir.ui.view">
+        <record id="view_payment_term_line_tree_instalment" model="ir.ui.view">
             <field name="name">account.payment.term.line.tree</field>
             <field name="model">account.payment.term.line</field>
             <field name="inherit_id" ref="account.view_payment_term_line_tree"/>
@@ -11,7 +11,7 @@
                     <field name="period_count"/>
                 </field>
             </field>
-        </record> -->
+        </record>
 
         <record id="view_payment_term_form_instalment" model="ir.ui.view">
             <field name="name">account.payment.term.form</field>
