@@ -20,8 +20,9 @@ class AccountPayment(models.Model):
     def _create_paired_intercompany_transfer_payment(self):
 
         for payment in self:
+
             company = payment.company_id
-            receiver_company = payment.partner_id.ref_company_ids
+            receiver_company = payment.partner_id.sudo().ref_company_ids
 
             if not receiver_company.journal_code:
                 raise UserError("Please set the journal code for the company you are transferring money to.")
