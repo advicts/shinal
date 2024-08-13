@@ -44,7 +44,7 @@ class customPartnerLedger(models.TransientModel):
                 ('partner_id', '=', partner_id.id), 
                 ('move_id.state', '=', 'posted'), 
                 ('journal_id.type', 'in', ['cash','sale','bank','purchase']),
-                ('account_id.user_type_id', 'in', ['liability_payable', 'asset_receivable']), 
+                ('account_id.user_type_id', 'in', [9, 1]),
                 # ('account_id.non_trade', '=', False),
                 ], order="date,id")
 
@@ -114,7 +114,7 @@ class customPartnerLedger(models.TransientModel):
                         ('date', '<=', self.date_to), 
                         ('move_id.state', '=', 'posted'), 
                         ('journal_id.type', 'in', ['cash','sale','bank','purchase']),
-                        ('account_id.user_type_id', 'in', ['liability_payable', 'asset_receivable']), 
+                        ('account_id.user_type_id', 'in', [9, 1]), 
                         # ('account_id.non_trade', '=', False),
                     ], order="date,id")
                     # move_lines = move_lines.filtered(lambda aml: aml.date >= self.date_from and aml.date <=self.date_to and aml.partner_id==partner_id)
