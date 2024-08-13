@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="custom_partner_ledger_report_template">
+        <t t-call="web.html_container"/>
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="row" style="margin-bottom: 5px;">
+                    <div class="col-3">Partner Ledger</div>
+                    <div class="col-3">
+                        <span style="padding-left: 5px;">Date Start:</span>
+                        <t t-esc="date_from"/>
+                    </div>
+                    <div class="col-3">
+                        <span style="padding-left: 5px;">Date End:</span>
+                        <t t-esc="date_to"/>
+                    </div>
+                </div>
+                <t t-foreach="data" t-as="partner_info">
+                    <div class="row">
+                        <table class="table table-condensed" style="border: 0px !important">
+                            <thead>
+                                <tr>
+                                    <th class="text-left" colspan="10">
+                                        <t t-esc="partner_info['name']"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="text-left" width="120px">
+                                        <span>Date</span>
+                                    </th>
+                                     <th class="text-left" width="120px">
+                                        <span>Ref</span>
+                                    </th>
+                                    <th class="text-left" style="text-align: left;">
+                                        <span>Debit</span>
+                                    </th>
+                                    <th class="text-left" style="text-align: left;">
+                                        <span>Credit</span>
+                                    </th>
+                                    <th class="text-left" style="text-align: left;"  colspan="3">
+                                        <span>Amount Currency</span>
+                                    </th>
+                                    <th style="text-align: left;" class="text-left" t-foreach="active_currency_ids" t-as="currency_id">
+                                        <span>Balance <t t-esc="currency_id['name']"/>
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-left">
+                                        Initial Balance
+                                    </td>
+                                    <td colspan="6"/>
+                                    <td class="text-left" t-foreach="active_currency_ids" t-as="currency_id">
+                                        <t t-set="init_balance" t-value="currency_map[partner_info['id'] + '-' + currency_id['id']]['init_balance']"/>
+                                        <span t-att-style="init_balance['style']">
+                                            <t t-esc="init_balance['value']"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr t-foreach="partner_info['moves']" t-as="line">
+                                    <td class="text-left">
+                                        <t t-esc="line['date']"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <t t-esc="line['ref']"/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-att-style="line['debit']['style']">
+                                            <t t-esc="line['debit']['value']"/>
+                                        </span>
+                                    </td>
+                                    <td class="text-left">
+                                        <span t-att-style="line['credit']['style']">
+                                            <t t-esc="line['credit']['value']"/>
+                                        </span>
+                                    </td>
+
+                                    <td class="text-left"  colspan="3">
+                                        <span t-att-style="line['amount_currency']['style']">
+                                            <t t-esc="line['amount_currency']['value']"/>
+                                        </span>
+                                    </td>
+
+                                    <td class="text-left" t-foreach="active_currency_ids" t-as="currency_id">
+                                        <t t-set="currency_balance" t-value="line[currency_id['key']]"/>
+                                        <span t-att-style="currency_balance['style']">
+                                            <t t-esc="currency_balance['value']"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+
+</odoo>

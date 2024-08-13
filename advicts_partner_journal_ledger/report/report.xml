@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="advicts_partner_journal_ledger.custom_partner_ledger_report_action" model="ir.actions.report">
+        <field name="name">custom Partner Ledger Report</field>
+        <field name="model">custom.partner.ledger</field>
+        <field name="binding_model_id" ref="model_custom_partner_ledger"/>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">advicts_partner_journal_ledger.custom_partner_ledger_report_template</field>
+        <field name="report_file">advicts_partner_journal_ledger.custom_partner_ledger_report_template</field>
+        <field name="binding_type">report</field>
+        <!-- <field name="paperformat_id" ref="advicts_partner_journal_ledger.report_paperformat"/> -->
+    </record>
+
+     <record id="advicts_partner_journal_ledger.custom_journal_ledger_report_action" model="ir.actions.report">
+        <field name="name">custom journal Ledger Report</field>
+        <field name="model">custom.journal.ledger</field>
+        <field name="binding_model_id" ref="model_custom_journal_ledger"/>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">advicts_partner_journal_ledger.custom_journal_ledger_report_template</field>
+        <field name="report_file">advicts_partner_journal_ledger.custom_journal_ledger_report_template</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="advicts_partner_journal_ledger.report_paperformat"/>
+    </record>
+
+
+</odoo>

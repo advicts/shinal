@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="advicts_partner_journal_ledger.custom_partner_ledger_menuitem" name="Advicts Partner Ledger" action="advicts_partner_journal_ledger.custom_partner_ledger_wizard_action" parent="account_reports.account_reports_partners_reports_menu" sequence="10"/>
+    <menuitem id="advicts_partner_journal_ledger.custom_journal_ledger_menuitem" name="Advicts Journal Ledger" action="advicts_partner_journal_ledger.custom_journal_ledger_wizard_action" parent="account_reports.account_reports_partners_reports_menu" sequence="11"/>
+</odoo>
