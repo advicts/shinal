@@ -1,0 +1,133 @@
+{
+  "info": {
+    "name": "PurchaseOrderAPI",
+    "description": "API for managing purchase orders in Odoo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Purchase Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"account_number\": \"PARTNER_REF\",\n  \"order_date\": \"2024-08-01\",\n  \"origin\": \"Origin Reference\",\n  \"lines\": [\n    {\n      \"product\": \"PRODUCT_API_ID\",\n      \"quantity\": 10,\n      \"purchase_price\": 100.0\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/purchaseorder/create",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "purchaseorder",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Purchase Order by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/purchaseorder/{{purchase_order_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "purchaseorder",
+            "{{purchase_order_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List Purchase Orders",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/purchaseorder/list?page={{page}}&page_size={{page_size}}&search={{search_term}}&order_by={{order_by}}&order_direction={{order_direction}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "purchaseorder",
+            "list"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "{{page}}",
+              "description": "Page number"
+            },
+            {
+              "key": "page_size",
+              "value": "{{page_size}}",
+              "description": "Number of records per page"
+            },
+            {
+              "key": "search",
+              "value": "{{search_term}}",
+              "description": "Search term"
+            },
+            {
+              "key": "order_by",
+              "value": "{{order_by}}",
+              "description": "Field to order by"
+            },
+            {
+              "key": "order_direction",
+              "value": "{{order_direction}}",
+              "description": "Order direction (asc/desc)"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8069"
+    },
+    {
+      "key": "purchase_order_id",
+      "value": "1"
+    },
+    {
+      "key": "page",
+      "value": "1"
+    },
+    {
+      "key": "page_size",
+      "value": "10"
+    },
+    {
+      "key": "search_term",
+      "value": ""
+    },
+    {
+      "key": "order_by",
+      "value": "date_order"
+    },
+    {
+      "key": "order_direction",
+      "value": "asc"
+    }
+  ]
+}

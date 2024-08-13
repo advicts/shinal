@@ -1,0 +1,897 @@
+{
+  "info": {
+    "name": "BioTime 8.5 API",
+    "_postman_id": "1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6",
+    "description": "BioTime 8.5 API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get JWT Auth Token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"username\",\"password\":\"pwd\"}"
+        },
+        "url": {
+          "raw": "http://serverIP:serverPort/jwt-api-token-auth/",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "jwt-api-token-auth"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get General Auth Token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"username\",\"password\":\"pwd\"}"
+        },
+        "url": {
+          "raw": "http://serverIP:serverPort/api-token-auth/",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "api-token-auth"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Device List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "JWT {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://serverIP:serverPort/iclock/api/terminals/",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "iclock",
+            "api",
+            "terminals"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Device Info",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "JWT {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://serverIP:serverPort/iclock/api/terminals/{{id}}",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "iclock",
+            "api",
+            "terminals",
+            "{{id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Employee List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "JWT {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://serverIP:serverPort/personnel/api/employee/",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "personnel",
+            "api",
+            "employee"
+          ],
+          "query": [
+            {
+              "key": "emp_code",
+              "value": "{{emp_code}}"
+            },
+            {
+              "key": "page",
+              "value": "{{page}}"
+            },
+            {
+              "key": "first_name",
+              "value": "{{first_name}}"
+            },
+            {
+              "key": "last_name",
+              "value": "{{last_name}}"
+            },
+            {
+              "key": "department",
+              "value": "{{department}}"
+            },
+            {
+              "key": "app_status",
+              "value": "{{app_status}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Employee Info",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "JWT {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://serverIP:serverPort/personnel/api/employees/{{id}}",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "personnel",
+            "api",
+            "employees",
+            "{{id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Employee",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "JWT {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"emp_code\":\"employee333\",\"first_name\":\"emp3_first_name\",\"last_name\":\"emp3_last_name\",\"area\":[1],\"department\":1}"
+        },
+        "url": {
+          "raw": "http://serverIP:serverPort/personnel/api/employees/",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "personnel",
+            "api",
+            "employees"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update Employee",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "JWT {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"first_name\":\"emp3_first_name_update\",\"last_name\":\"emp3_last_name_update\"}"
+        },
+        "url": {
+          "raw": "http://serverIP:serverPort/personnel/api/employees/{{id}}",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "personnel",
+            "api",
+            "employees",
+            "{{id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Delete Employee",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "JWT {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://serverIP:serverPort/personnel/api/employees/{{id}}",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "personnel",
+            "api",
+            "employees",
+            "{{id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update Employee",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "JWT your-jwt-token"
+          }
+        ],
+        "url": {
+          "raw": "http://serverIP:serverPort/personnel/api/employees/employee-id/",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "personnel",
+            "api",
+            "employees",
+            "employee-id"
+          ]
+        },
+        "body": {
+          "mode": "raw"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Employee",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "JWT your-jwt-token"
+          }
+        ],
+        "url": {
+          "raw": "http://serverIP:serverPort/personnel/api/employees/employee-id/",
+          "protocol": "http",
+          "host": [
+            "serverIP"
+          ],
+          "port": "serverPort",
+          "path": [
+            "personnel",
+            "api",
+            "employees",
+            "employee-id"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Department API",
+      "item": [
+        {
+          "name": "Get Department List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/departments/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "departments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Department Object Info",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/departments/department-id/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "departments",
+                "department-id"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Department",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/departments/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "departments"
+              ]
+            },
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Department",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/departments/department-id/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "departments",
+                "department-id"
+              ]
+            },
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Department",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/departments/department-id/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "departments",
+                "department-id"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Area API",
+      "item": [
+        {
+          "name": "Get Area List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/areas/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "areas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Area Object Info",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/areas/area-id/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "areas",
+                "area-id"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Area",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/areas/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "areas"
+              ]
+            },
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Area",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/areas/area-id/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "areas",
+                "area-id"
+              ]
+            },
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Area",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/areas/area-id/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "areas",
+                "area-id"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Position API",
+      "item": [
+        {
+          "name": "Get Position List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/positions/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "positions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Position Object Info",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/positions/position-id/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "positions",
+                "position-id"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Position",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/positions/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "positions"
+              ]
+            },
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Position",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/positions/position-id/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "positions",
+                "position-id"
+              ]
+            },
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Position",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/personnel/api/positions/position-id/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "personnel",
+                "api",
+                "positions",
+                "position-id"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Transaction API",
+      "item": [
+        {
+          "name": "Get Transaction List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT your-jwt-token"
+              }
+            ],
+            "url": {
+              "raw": "http://serverIP:serverPort/attendances/api/transactions/",
+              "protocol": "http",
+              "host": [
+                "serverIP"
+              ],
+              "port": "serverPort",
+              "path": [
+                "attendances",
+                "api",
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
