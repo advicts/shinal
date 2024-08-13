@@ -157,7 +157,7 @@ class customPartnerLedger(models.TransientModel):
     def format_value(self, value, currency_id, figure_type='monetary', blank_if_zero=False):
         report = self.env['account.report']
         return {
-            'value': report.format_value(value, currency_id, figure_type=figure_type, blank_if_zero=blank_if_zero),
+            'value': report.format_value(value, currency_id,  blank_if_zero=blank_if_zero),
             'style': 'color: red;' if value < 0 else '',
         }
     
