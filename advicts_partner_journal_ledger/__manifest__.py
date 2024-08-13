@@ -7,7 +7,7 @@
     'website': "https://advicts.com",
     'category': 'Uncategorized',
     'version': '0.0',
-    'depends': ['base', 'account_accountant'],
+    'depends': ['base', 'account_accountant','account'],
     'data': [
         'security/ir.model.access.csv',
         'data/report_paperformat.xml',
