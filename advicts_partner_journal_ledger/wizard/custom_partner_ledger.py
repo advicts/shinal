@@ -84,10 +84,10 @@ class customPartnerLedger(models.TransientModel):
                     # move_lines = move_lines.filtered(lambda aml: aml.date >= self.date_from and aml.date <=self.date_to and aml.partner_id==partner_id)
                     for move in moves:
                         # try:
-                            total_debit = sum(move.line_ids.filtered(lambda line: line.debit and line.account_id.account_type in ['liability_payable', 'asset_receivable']).mapped('debit'))
-                            total_credit = sum(move.line_ids.filtered(lambda line: line.credit and line.account_id.account_type in ['liability_payable', 'asset_receivable']).mapped('credit'))
-                            total_amount_currency = sum(move.line_ids.filtered(lambda line: line.account_id.account_type in ['liability_payable', 'asset_receivable']).mapped('amount_currency'))
-                            first_line = next((line for line in move.line_ids if line.account_id.account_type in ['liability_payable', 'asset_receivable']), False)
+                            total_debit = sum(move.line_ids.filtered(lambda line: line.debit and line.account_id.user_type_id in [1,9]).mapped('debit'))
+                            total_credit = sum(move.line_ids.filtered(lambda line: line.credit and line.account_id.user_type_id in [1,9]).mapped('credit'))
+                            total_amount_currency = sum(move.line_ids.filtered(lambda line: line.account_id.user_type_id in [1,9]).mapped('amount_currency'))
+                            first_line = next((line for line in move.line_ids if line.account_id.user_type_id in [1,9]), False)
 
                             converted_debit = company_currency._convert(total_debit, currency_id, company_id, move.date)
                             converted_credit = company_currency._convert(total_credit, currency_id, company_id, move.date) 
