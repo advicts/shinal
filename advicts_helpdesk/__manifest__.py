@@ -4,7 +4,7 @@
     'category': 'Tools',
     'summary': 'advicts_helpdesk',
     'description': 'advicts_helpdesk',
-    'depends': ['base', 'hr','helpdesk'],
+    'depends': ['helpdesk'],
     'data': [
         # 'security/ir.model.access.csv', 
         'views/view.xml',
