@@ -1,9 +1,9 @@
 <odoo>
     <data> 
-        <record id="view_task_type_form_inherit" model="ir.ui.view">
-            <field name="name">project.task.type.form.inherit</field>
-            <field name="model">project.task.type</field>
-            <field name="inherit_id" ref="project.project_task_type_form_view"/>
+        <record id="view_helpdesk_stage_form_inherit" model="ir.ui.view">
+            <field name="name">helpdesk.stage.form.inherit</field>
+            <field name="model">helpdesk.stage</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_stage_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='sequence']" position="after">
                     <field name="is_finished"/>
@@ -11,13 +11,38 @@
             </field>
         </record>
  
-        <record id="view_task_type_tree_inherit" model="ir.ui.view">
-            <field name="name">project.task.type.tree.inherit</field>
-            <field name="model">project.task.type</field>
-            <field name="inherit_id" ref="project.project_task_type_tree_view"/>
+        <record id="view_helpdesk_stage_tree_inherit" model="ir.ui.view">
+            <field name="name">helpdesk.stage.tree.inherit</field>
+            <field name="model">helpdesk.stage</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_stage_tree_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//tree" position="inside">
                     <field name="is_finished" widget="boolean_toggle" options="{'terminology': 'finished'}"/>
+                </xpath>
+            </field>
+        </record>
+
+
+          <record id="view_helpdesk_ticket_form_inherit" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.form.inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.view_helpdesk_ticket_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='stage_id']" position="after">
+                    <field name="date_create" />
+                    <field name="date_finish" />
+                </xpath>
+            </field>
+        </record>
+ 
+        <record id="view_helpdesk_ticket_tree_inherit" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.tree.inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.view_helpdesk_ticket_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <field name="date_create" />
+                    <field name="date_finish" />
                 </xpath>
             </field>
         </record>
