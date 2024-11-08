@@ -3,7 +3,7 @@
 
 {
     "name" : "Sale Delivery and Invoice Status in Odoo",
-    "version" : "15.0.0.0",
+    "version" : "17.0.0.0",
     "category" : "Sales",
     'license': 'OPL-1',
     'summary': 'This module helps the user to get the status of delivery and invoice of sale order also available filter for a sale order with full or partial delivery orders, fully or partially invoiced order.',
