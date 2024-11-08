@@ -21,7 +21,7 @@
 
 {
     'name': 'Sales All In One Report Generator',
-    'version': '15.0.1.0.0',
+    'version': '17.0.0.0',
     'summary': "Dynamic Sales Report Maker",
     'description': "Dynamic Sales Report Maker",
     'category': 'Sale',
