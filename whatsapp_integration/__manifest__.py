@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WhatsApp Odoo Integration',
-    'version': '15.0.2.1.3',
+    'version': '17.0.0.0',
     'category': 'Tools',
     'author': 'InTechual Solutions',
     'license': 'OPL-1',
