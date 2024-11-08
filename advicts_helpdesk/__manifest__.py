@@ -1,6 +1,6 @@
 {
     'name': 'advicts_helpdesk',
-    'version': '15.0.0.0',
+    'version': '17.0.0.0',
     'category': 'Tools',
     'summary': 'advicts_helpdesk',
     'description': 'advicts_helpdesk',
