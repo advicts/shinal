@@ -22,7 +22,7 @@
 
 {
     'name': "Instalment in Payment Terms",
-    'version': '15.0.1.0.0',
+    'version': '17.0.0.0',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
