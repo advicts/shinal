@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WhatsApp Sales Integration',
-    'version': '15.0.1.0.0',
+    'version': '17.0.0.0',
     'author': 'InTechual Solutions',
     'license': 'OPL-1',
     'category': 'Tools',
