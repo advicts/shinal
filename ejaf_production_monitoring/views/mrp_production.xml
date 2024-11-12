@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mrp_production_form_view_monitor" model="ir.ui.view">
+            <field name="name">mrp.production.form.monitor</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_confirm']" position="after">
+                    <button name="%(ejaf_production_monitoring.production_monitoring_wizard_action)d" type="action"
+                            class="oe_highlight"
+                            string="Create Production Monitoring"
+                            attrs="{'invisible': [ '|',('state', 'in', ['cancel','done']), ('monitor_count', '!=', 0)]}"/>
+                </xpath>
+                <xpath expr="//button[@name='action_view_mrp_production_sources']" position="after">
+                    <button class="oe_stat_button" name="open_production_monitoring" type="object"
+                            attrs="{'invisible': [('monitor_count', '=', 0)]}"
+                            icon="fa-check">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Production Monitoring</span>
+                            <field name="monitor_count"/>
+                        </div>
+                    </button>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

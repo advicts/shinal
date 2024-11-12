@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <data noupdate="1">
+    <record id="seq_visit_planning_management" model="ir.sequence">
+      <field name="name">Visit Planinng Management</field>
+      <field name="code">visits.planning</field>
+      <field name="prefix">VP</field>
+      <field name="padding">4</field>
+      <field name="company_id" eval="False" />
+    </record>
+
+    <!-- Sequences for visit.visit -->
+    <record id="seq_visits_visit" model="ir.sequence">
+      <field name="name">Visits Visit</field>
+      <field name="code">visits.visit</field>
+      <field name="prefix">VT</field>
+      <field name="padding">4</field>
+      <field name="company_id" eval="False" />
+    </record>
+  </data>
+</odoo>

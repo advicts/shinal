@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- model.name action window -->
+        <record id="zom_dairy_external_purchase_order_action" model="ir.actions.act_window">
+            <field name="name">External Purchase Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[('is_external_purchase_order','=',True)]</field>
+            <field name="context">{"default_is_external_purchase_order": True, "is_external_purchase_order": True}
+            </field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="zom_dairy_internal_purchase_order_action" model="ir.actions.act_window">
+            <field name="name">Internal Purchase Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[('is_external_purchase_order','=',False)]</field>
+            <field name="context">{"default_is_external_purchase_order": False,"default_is_internal_purchase_order": True, "is_external_purchase_order": False, "is_internal_purchase_order": True}
+            </field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+
+        <record id="zom_payments_action" model="ir.actions.act_window">
+            <field name="name">Payments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[('is_zom_app','=',True)]</field>
+            <field name="context">{"default_is_zom_app": True, "is_zom_app": True}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+
+        <record id="zom_stock_picking_action" model="ir.actions.act_window">
+            <field name="name">Transfers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_zom_app','=',True)]</field>
+            <field name="context">{"default_is_zom_app": True, "is_zom_app": True}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Zom Dairy" groups="zom_dairy.access_zom_module_group_user" id="zom_dairy_menu" sequence="30"
+                  web_icon="zom_dairy,static/description/icon.png"/>
+        <menuitem name="Configuration" groups="zom_dairy.access_zom_module_group_manger"
+                  id="zom_dairy_configuration_menu" parent="zom_dairy_menu" sequence="30"/>
+        <menuitem id="res_users_zom_dairy_menu" groups="zom_dairy.access_zom_module_group_manger"
+                  action="action_res_users_zom_dairy" name="Settings" parent="zom_dairy_configuration_menu"
+                  sequence="12"/>
+        <menuitem id="collection_center_menu" groups="zom_dairy.access_zom_module_group_manger"
+                  action="action_collection_center" name="Collection Center" parent="zom_dairy_configuration_menu"
+                  sequence="10"/>
+        <menuitem name="Purchase" groups="zom_dairy.access_zom_module_group_user" id="zom_dairy_purchase_menu"
+                  parent="zom_dairy_menu" sequence="1"/>
+        <menuitem id="zom_dairy_external_purchase_order_menu" groups="zom_dairy.access_zom_module_group_user"
+                  action="zom_dairy_external_purchase_order_action" name="External Purchase"
+                  parent="zom_dairy_purchase_menu" sequence="1"/>
+        <menuitem id="zom_dairy_internal_purchase_order_menu" groups="zom_dairy.access_zom_module_group_user"
+                  action="zom_dairy_internal_purchase_order_action" name="Internal Purchase"
+                  parent="zom_dairy_purchase_menu" sequence="2"/>
+        <menuitem id="scan_zom_dairy_internal_purchase_order_menu" groups="zom_dairy.access_zom_module_group_user"
+                  action="purchase_order_find" name="Find Purchase" parent="zom_dairy_purchase_menu" sequence="3"/>
+        <menuitem id="zom_payments" groups="zom_dairy.access_zom_module_group_manger" action="zom_payments_action"
+                  name="Payments" parent="zom_dairy_menu" sequence="2"/>
+        <menuitem id="zom_transfers" groups="zom_dairy.access_zom_module_group_user" action="zom_stock_picking_action"
+                  name="Transfers" parent="zom_dairy_menu" sequence="3"/>
+        <menuitem id="action_partner_zone_menu" action="action_partner_zone_view" name="Partner Zone"
+                  parent="purchase.menu_purchase_config" sequence="3"/>
+
+
+        <!-- Purchase Menus   -->
+        <menuitem name="Purchase"
+                  groups="purchase.group_purchase_user"
+                  id="zom_dairy_purchase_menu_p"
+                  parent="purchase.menu_purchase_root"
+                  sequence="1"/>
+
+        <menuitem id="zom_dairy_external_purchase_order_menu_p"
+                  groups="purchase.group_purchase_user"
+                  action="zom_dairy_external_purchase_order_action"
+                  name="External Purchase"
+                  parent="zom_dairy_purchase_menu_p"
+                  sequence="1"/>
+
+        <menuitem id="zom_dairy_internal_purchase_order_menu_p"
+                  groups="purchase.group_purchase_user"
+                  action="zom_dairy_internal_purchase_order_action"
+                  name="Internal Purchase"
+                  parent="zom_dairy_purchase_menu_p"
+                  sequence="2"/>
+
+        <menuitem id="scan_zom_dairy_internal_purchase_order_menu_p"
+                  groups="purchase.group_purchase_user"
+                  action="purchase_order_find"
+                  name="Find Purchase"
+                  parent="zom_dairy_purchase_menu_p"
+                  sequence="3"/>
+
+    </data>
+</odoo>

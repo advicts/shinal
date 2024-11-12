@@ -1,0 +1,108 @@
+<odoo>
+  <data>
+
+    <record id="scan_order_find" model="ir.actions.act_window">
+      <field name="name">Find SO</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">barcode.action</field>
+      <field name="view_mode">form</field>
+      <field name="context">{'default_model': 'sale.order', 'default_method': 'find_so_by_ref_using_barcode'}
+      </field>
+      <field name="target">new</field>
+    </record>
+
+    <!-- model.name inherit form view -->
+    <record id="view_order_form" model="ir.ui.view">
+      <field name="name">sale_order_vansales</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form" />
+      <field name="arch" type="xml">
+        <!-- Add your xpath here -->
+        <xpath expr="//page[@name='other_information']" position="after">
+          <page string="Vansales Info" name="vansales_information">
+            <group string="Order Reference">
+              <field name="vansales_ref" />
+            </group>
+            <group string="Order Geo Location">
+              <field name="partner_latitude" />
+              <field name="partner_longitude" />
+            </group>
+            <group string="Distance Geo (km)">
+                <field name="distance_geo_location"/>
+            </group>
+          </page>
+        </xpath>
+      </field>
+    </record>
+
+      <record id="view_order_tree_inherit" model="ir.ui.view">
+          <field name="name">view.order.tree.inherit</field>
+          <field name="model">sale.order</field>
+          <field name="inherit_id" ref="sale.view_order_tree"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='company_id']" position="after">
+                  <field name="distance_geo_location"/>
+              </xpath>
+          </field>
+      </record>
+
+      <record id="view_quotation_tree_inherit" model="ir.ui.view">
+          <field name="name">view.quotation.tree.inherit</field>
+          <field name="model">sale.order</field>
+          <field name="inherit_id" ref="sale.view_quotation_tree"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='company_id']" position="after">
+                  <field name="distance_geo_location"/>
+              </xpath>
+          </field>
+      </record>
+    <record id="view_sale_order_google_map" model="ir.ui.view">
+      <field name="name">view.sale.order.google_map</field>
+      <field name="model">sale.order</field>
+      <field name="arch" type="xml">
+        <google_map class="o_res_partner_google_map" library="geometry" string="Map" lat="partner_latitude" lng="partner_longitude" color="orange">
+          <field name="name" />
+          <field name="partner_id" />
+          <field name="amount_total" />
+          <field name="partner_longitude" />
+          <field name="partner_latitude" />
+          <field name="date_order" />
+          <field name="state" />
+          <field name="currency_id" />
+          <field name="activity_state" />
+          <progressbar field="activity_state" colors="{&quot;planned&quot;: &quot;success&quot;, &quot;today&quot;: &quot;warning&quot;, &quot;overdue&quot;: &quot;danger&quot;}" />
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                <div class="o_kanban_record_top mb16">
+                  <div class="o_kanban_record_headings mt4">
+                    <strong class="o_kanban_record_title">
+                      <span>
+                        <t t-esc="record.partner_id.value" />
+                      </span>
+                    </strong>
+                  </div>
+                  <strong>
+                    <field name="amount_total" widget="monetary" />
+                  </strong>
+                </div>
+                <div class="o_kanban_record_bottom">
+                  <div class="oe_kanban_bottom_left text-muted">
+                    <span>
+                      <t t-esc="record.name.value" />
+                      <t t-esc="record.date_order.value" />
+                    </span>
+                    <field name="activity_ids" widget="kanban_activity" />
+                  </div>
+                  <div class="oe_kanban_bottom_right">
+                    <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'cancel': 'default', 'done': 'success'}}" />
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </google_map>
+      </field>
+    </record>
+  </data>
+</odoo>

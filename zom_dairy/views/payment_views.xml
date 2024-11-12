@@ -1,0 +1,16 @@
+<odoo>
+  <data>
+    <record id="account_payment_zom_app" model="ir.ui.view">
+      <field name="name">account.payment.view.inhirit</field>
+      <field name="model">account.payment</field>
+      <field name="inherit_id" ref="account.view_account_payment_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='company_id']" position="after">
+          <field name="is_zom_app" invisible='1' />
+          <field name="collection_center_id" attrs="{'invisible': [('is_zom_app', '=', False)]}" />
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

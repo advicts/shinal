@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_category_zome">
+            <field name="name">Zom Dairy</field>
+            <field name="sequence">10</field>
+        </record>
+        <record id="access_zom_module_group_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="zom_dairy.module_category_zome"/>
+
+        </record>
+        <record id="access_zom_module_group_manger" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="implied_ids" eval="[(4, ref('zom_dairy.access_zom_module_group_user'))]"/>
+            <field name="category_id" ref="zom_dairy.module_category_zome"/>
+
+        </record>
+
+         <record id="zom_rule_po_personal_user" model="ir.rule">
+            <field name="name">Personal Po Record</field>
+            <field ref="purchase.model_purchase_order" name="model_id"/>
+            <field name="domain_force">['|',('user_id','=',user.id),('user_id','=',False)]</field>
+            <field name="groups" eval="[(4, ref('zom_dairy.access_zom_module_group_user'))]"/>
+        </record>
+        <record id="zom_rule_po_all_manager" model="ir.rule">
+            <field name="name">All Po Record</field>
+            <field ref="purchase.model_purchase_order" name="model_id"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('zom_dairy.access_zom_module_group_manger'))]"/>
+        </record>
+
+
+         <record id="zom_rule_transfer_personal_user" model="ir.rule">
+            <field name="name">Personal Transfer Record</field>
+            <field ref="stock.model_stock_picking" name="model_id"/>
+            <field name="domain_force">['|',('user_id','=',user.id),('user_id','=',False)]</field>
+            <field name="groups" eval="[(4, ref('zom_dairy.access_zom_module_group_user'))]"/>
+        </record>
+        <record id="zom_rule_transfer_all_manager" model="ir.rule">
+            <field name="name">All Po Record</field>
+            <field ref="stock.model_stock_picking" name="model_id"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('zom_dairy.access_zom_module_group_manger'))]"/>
+        </record>
+    </data>
+</odoo>

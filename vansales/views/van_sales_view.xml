@@ -1,0 +1,164 @@
+<odoo>
+  <data>
+    <record id="res_users_vansales_tree" model="ir.ui.view">
+      <field name="name">VanSales Users</field>
+      <field name="model">res.users.vansales</field>
+      <field name="arch" type="xml">
+        <tree string="VanSales Users">
+          <field name="user_id" />
+          <field name="name" />
+          <field name="email" />
+          <field name="active" />
+        </tree>
+      </field>
+    </record>
+    <!-- User VanSales form view definition -->
+    <record model="ir.ui.view" id="res_users_vansales_from">
+      <field name="name">VanSales Users</field>
+      <field name="model">res.users.vansales</field>
+      <field name="arch" type="xml">
+        <form string="Vansales Users">
+          <header>
+            <button
+              name="action_update_sync"
+              active="1"
+              type="object"
+              string="Synchronize User Data"
+            />
+          </header>
+
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                <field
+                  name="active"
+                  widget="boolean_button"
+                  options="{&quot;terminology&quot;: &quot;active&quot;}"
+                />
+              </button>
+            </div>
+            <group>
+              <group>
+                <field name="user_id" />
+                <field name="name" />
+                <field name="company_id" />
+                <field name="default_currency_id" />
+              </group>
+              <group>
+                <field name="email" />
+                <field name="password" password="True" />
+              </group>
+            </group>
+
+            <notebook>
+              <page string="Sales Setting">
+                <group>
+                  <group>
+                    <field name="customer_category_ids" widget="many2many_tags" />
+                    <field name="product_category_ids" widget="many2many_tags" />
+                    <field name="has_group_uom" />
+                    <field name="sale_journal" />
+                    <field name="cash_journal" />
+                  </group>
+                  <group>
+                    <field name="allow_user_update_location" />
+                    <field name="allow_user_order_location" />
+                    <field
+                      name="user_order_location_with_in_radius"
+                      attrs="{'invisible':[('allow_user_order_location','=',True)]}"
+                    />
+                    <field name="is_qr_code_scanning_necessary"></field>
+                    <field name="allow_over_credit" />
+                    <field name="allow_ordering_from_out_of_stock"/>
+                    <field name="close_old_visit_on_start_new_visit"/>
+                    <field name="is_sale_order" />
+                    <field name="is_invoiced" />
+                    <field name="is_paid_order" />
+                    <field name="is_invoice_printed" />
+                  </group>
+
+                  <group string="Discount Setting">
+                    <field name="is_discount_enable" />
+                    <field
+                      name="discount_type"
+                      widget="radio"
+                      attrs="{'invisible':[('is_discount_enable','!=',True)]}"
+                    />
+                    <field
+                      name="maximum_discount"
+                      attrs="{'invisible':[('is_discount_enable','!=',True)]}"
+                    />
+                  </group>
+
+                  <group string="Free Setting">
+                    <field name="enable_free_qty" />
+                    <field
+                      name="analytic_tag_id"
+                      attrs="{'invisible':[('enable_free_qty','!=',True)]}"
+                    />
+                  </group>
+                </group>
+              </page>
+              <page string="Inventory Setting">
+                <group>
+                  <group string="Sales Settings">
+                    <field name="is_delivered" />
+                    <field name="stock_picking_type" />
+                    <field name="warehouse_id" />
+                    <field name="default_location_src_id" />
+                    <field name="default_location_dest_id" />
+                  </group>
+                  <group string="Return Settings">
+                    <field name="is_return_validated"></field>
+                    <field name="is_return_confirm_credit_note"></field>
+                    <field name="return_stock_picking_type" />
+                    <field name="return_warehouse_id" />
+                    <field name="return_default_location_src_id" />
+                    <field name="return_default_location_dest_id" />
+                  </group>
+                  <group string="Load Request Settings">
+                    <field name="load_request_stock_picking_type" />
+                    <field name="load_request_warehouse_id" />
+                    <field name="load_request_default_location_src_id" />
+                    <field name="load_request_default_location_dest_id" />
+                  </group>
+                </group>
+              </page>
+
+              <page string="Payment Setting">
+                <group>
+                  <field name="is_posted_payment" />
+                </group>
+              </page>
+
+              <page string="Employee Setting">
+                <group>
+                  <field name="employee_id" />
+                </group>
+              </page>
+              <page string="Other Setting">
+                <group>
+                  <field name="is_auto_sync" />
+                </group>
+                <group>
+                  <field name="force_tracking" />
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers" />
+            <field name="message_ids" widget="mail_thread" />
+          </div>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_res_users_vansales">
+      <field name="name">VanSales Users</field>
+      <field name="res_model">res.users.vansales</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="res_users_vansales_tree" />
+    </record>
+    <!-- <menuitem name="VanSales Users" id="res_users_vansales_menu" parent="base.menu_users" groups="sales_team.group_sale_manager" action="action_res_users_vansales" sequence="15" /> -->
+  </data>
+</odoo>

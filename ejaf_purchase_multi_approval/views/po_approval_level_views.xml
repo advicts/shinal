@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="po_approval_level_form" model="ir.ui.view">
+            <field name="name">po.approval.level.form</field>
+            <field name="model">po.approval.level</field>
+            <field name="arch" type="xml">
+                <form string="PO Approval Level">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="access_type" required="1"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            <field name="group_ids"
+                                   attrs="{'invisible':[('access_type','!=','groups')],'required':[('access_type','=','groups')]}"
+                                   widget="many2many_tags"/>
+                            <field name="user_ids"
+                                   attrs="{'invisible':[('access_type','!=','users')],'required':[('access_type','=','users')]}"
+                                   widget="many2many_tags"/>
+                            <field name="sequence" invisible="1"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="po_approval_level_tree" model="ir.ui.view">
+            <field name="name">po.approval.level.tree</field>
+            <field name="model">po.approval.level</field>
+            <field name="arch" type="xml">
+                <tree string="PO Approval Levels">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="access_type"/>
+                    <field name="group_ids" widget="many2many_tags"/>
+                    <field name="user_ids" widget="many2many_tags"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_po_approval_level" model="ir.actions.act_window">
+            <field name="name">PO Approval Levels</field>
+            <field name="res_model">po.approval.level</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="po_approval_level_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new PO Approval Level
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_po_approval_level_config" name="PO Approval Levels" parent="purchase.menu_purchase_config"
+                  sequence="4" action="action_po_approval_level"
+                  groups="ejaf_purchase_multi_approval.group_po_multi_approval_level"/>
+
+    </data>
+</odoo>

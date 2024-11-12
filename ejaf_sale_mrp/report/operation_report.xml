@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+          <template id="mrp_report_mrporder_enh" inherit_id="mrp.report_mrporder"
+              >
+            <xpath expr="//table[@t-if='o.move_raw_ids']" position="after">
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                 <div class="row">
+                     <div class="col-6 mb4 " style="text-align:left;">
+                                <strong class="text-left">
+                                        Delivered by
+                                </strong>
+                       </div>
+                      <div class="col-6 mb4 " style="text-align:right;">
+                                <strong>Recipient's
+                                </strong>
+                       </div>
+                 </div>
+
+
+            </xpath>
+          </template>
+    </data>
+</odoo>

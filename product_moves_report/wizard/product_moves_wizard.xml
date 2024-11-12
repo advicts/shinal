@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_moves_report_wizard" model="ir.ui.view">
+            <field name="name">Product Moves Report</field>
+            <field name="model">product.moves.report.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="product_filter" widget="radio"/>
+                            <field name="partner_ids" widget="many2many_tags"/>
+                            <field name="salesperson_ids" widget="many2many_tags"/>
+                            <field name="date_from"/>
+                        </group>
+                        <group>
+                            <field name="product_id"
+                                   attrs="{'required': [('product_filter','=', 'product')],'invisible': [('product_filter','!=', 'product')]}"/>
+                            <field name="product_categ_id"
+                                   attrs="{'required': [('product_filter','=', 'product_category')],'invisible': [('product_filter','!=', 'product_category')]}"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="is_all_internal_location" groups="stock.group_stock_manager"/>
+                        <field name="location_id" options="{'no_create': True}"
+                               attrs="{'invisible': [('is_all_internal_location', '=', True)], 'required': [('is_all_internal_location', '=', False)]}"/>
+                    </group>
+                    <footer>
+                        <button string="Print XLSX" class="oe_highlight" type="object" name="print_xlsx_report"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_moves_report_wizard" model="ir.actions.act_window">
+            <field name="name">Product Moves Report</field>
+            <field name="res_model">product.moves.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product_moves_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <!--<menuitem id="menu_product_moves_report" name="Product Moves in Details Report" parent="stock.menu_warehouse_report"-->
+        <!--action="action_product_moves_report_wizard" sequence="99"/>-->
+        <!---->
+        <menuitem
+                id="categ_menu_product_moves_report"
+                name="Product Moves in Details Report"
+                sequence="100"
+                parent="stock.menu_stock_root"
+                groups="stock.group_stock_user"/>
+
+        <menuitem
+                id="menu_product_moves_report"
+                name="Product Moves in Details Report"
+                parent="categ_menu_product_moves_report"
+                action="action_product_moves_report_wizard"
+                groups="stock.group_stock_user"/>
+
+    </data>
+</odoo>

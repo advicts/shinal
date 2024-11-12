@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_find" model="ir.actions.act_window">
+        <field name="name">Find PO</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">barcode.action</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_model': 'purchase.order', 'default_method': 'find_po_by_ref_using_barcode'}
+        </field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="purchase_order_list_view_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.list.view.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <field name="total_qty"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="inherit_view_id_purchase_order" model="ir.ui.view">
+        <field name="name">purchase_order collection center</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_ref']" position="after">
+                <field name="collection_center_id"/>
+            </xpath>
+            <xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
+                <page string="ZOM Dairy Info" name="zom_information">
+                    <group string="Order Reference">
+                        <field name="po_ref"/>
+                    </group>
+                    <group string="Order Geo Location">
+                        <field name="partner_latitude"/>
+                        <field name="partner_longitude"/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='order_line']" position="after">
+                <group>
+                    <field name="total_qty"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

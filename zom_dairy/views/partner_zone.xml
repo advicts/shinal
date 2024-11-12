@@ -1,0 +1,36 @@
+<odoo>
+  <data>
+    <record id="partner_zone_view_tree" model="ir.ui.view">
+      <field name="name">partner.zone.tree</field>
+      <field name="model">partner.zone</field>
+      <field name="arch" type="xml">
+        <tree string="Partner Zone">
+          <field name="name" />
+          <field name="code" />
+
+        </tree>
+      </field>
+    </record>
+    <record id="partner_zone_view_form" model="ir.ui.view">
+      <field name="name">partner.zone.tree</field>
+      <field name="model">partner.zone</field>
+      <field name="arch" type="xml">
+        <form string="Partner Zone">
+            <sheet>
+                <group>
+                  <field name="name" />
+                  <field name="code" />
+                </group>
+           </sheet>
+
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_partner_zone_view">
+      <field name="name">Partner Zone</field>
+      <field name="res_model">partner.zone</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+  </data>
+</odoo>

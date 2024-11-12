@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report id="customer_card.customer_card_report2" model="res.partner" name="customer_card.customer_qr_template2"
+                file="customer_card.customer_qr_template2" string="Customer Card New" report_type="qweb-pdf"/>
+        <record id="customer_card.customer_card_report2" model="ir.actions.report">
+            <field name="paperformat_id" ref="customer_card.customer_card_customer_card_paperformat2"/>
+        </record>
+
+        <template id="customer_qr_template2">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="record">
+                    <t t-call="web.basic_layout">
+                        <style>
+                            table{
+                            border:2px solid black !important;
+                            width:400px;
+                            height:190px;
+                            }
+                            tr{
+                            border:1px solid black !important;
+                            }
+                            td{
+                            border:0px solid black !important;
+                            font-size:16px;
+                            }
+                            .ellipse {
+                            white-space: nowrap;
+                            display:inline-block;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            }
+                            .two-lines {
+                            -webkit-line-clamp: 1;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            white-space: normal;
+                            max-lines: 1;
+                            line-clamp: 1;
+                            }
+
+                        </style>
+                        <div class="page">
+                            <center>
+                                <div width="100%">
+                                    <img style="width: 700px; height: 290px;"
+                                         src="/customer_card/static/description/header.png"/>
+                                </div>
+                                <strong style="font-size:30px;" t-esc="record.display_name[:32]"/>
+                                <strong>...</strong>
+                                <div width="80%"
+                                     style="border-radius: 15px 15px 15px 15px;border:30px solid #0F147C;width:80%">
+                                    <br></br>
+                                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR',str({'id':record.id,'name':record.name,'phone':str(record.phone),'mobile':str(record.mobile)}), 400, 150)"
+                                         style="width:390px;height:390px;"/>
+                                    <br></br>
+                                    <span style="color:#FFFFFF">-</span>
+
+                                </div>
+                                <br></br>
+                                <div width="80%" class="text-center"
+                                     style="border-radius: 15px 15px 15px 15px;background-color:#E60000;width:80%">
+                                    <strong style="color:#E60000;">----</strong>
+                                    <strong t-esc="env.company.phone"
+                                            style="font-size:78px;color:#FFFFFF"/>
+                                    <strong style="color:#E60000;">----</strong>
+
+                                </div>
+                            </center>
+
+
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_anviz_device,access.anviz.device,model_anviz_device,,1,1,1,1
-access_attendance_record,access.attendance.record,model_attendance_record,,1,1,1,1
-access_anviz_sync,access.anviz.sync,model_anviz_sync,,1,1,1,1

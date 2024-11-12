@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="production_monitoring_root" name="Production Monitoring" sequence="1"
+                  web_icon="ejaf_production_monitoring,static/description/icon.png"
+                  groups="ejaf_production_monitoring.production_monitoring_user"/>
+        <menuitem id="production_monitoring_action_menu_over" name="Overview"
+                  parent="production_monitoring_root" action="production_monitoring_team_action_over_view"
+                  sequence="1"/>
+        <menuitem id="production_monitoring_action_menu" name="Production Monitoring"
+                  parent="production_monitoring_root" action="production_monitoring_action_view" sequence="2"/>
+
+
+        <menuitem id="production_monitoring_setting_menu" name="Configuration" parent="production_monitoring_root"
+                  groups="ejaf_production_monitoring.production_monitoring_admin"
+                  sequence="2"/>
+        <menuitem id="production_monitoring_team_action_menu" name="Types"
+                  parent="production_monitoring_setting_menu" action="production_monitoring_team_action_view"
+                  sequence="1"/>
+        <menuitem id="production_monitoring_stage_action_menu" name="Stages"
+                  parent="production_monitoring_setting_menu" action="production_monitoring_stage_action_view"
+                  sequence="2"/>
+
+    </data>
+</odoo>

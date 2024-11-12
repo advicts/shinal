@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="po_approval_level_form" model="ir.ui.view">
+            <field name="name">po.approval.level.form</field>
+            <field name="model">po.approval.level</field>
+            <field name="inherit_id" ref="ejaf_purchase_multi_approval.po_approval_level_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="string">PO Approval Action</attribute>
+                </xpath>
+                <xpath expr="//field[@name='group_ids']" position="after">
+                    <field name="group_user_ids" invisible="1"/>
+                    <field name="to_notify_user_ids" widget="many2many_tags" domain="[('id', 'in', group_user_ids)]"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="amount_from"/>
+                    <field name="amount_to"/>
+                    <field name="currency_id" groups="base.group_multi_currency" options="{'no_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="po_approval_level_tree" model="ir.ui.view">
+            <field name="name">po.approval.level.tree</field>
+            <field name="model">po.approval.level</field>
+            <field name="inherit_id" ref="ejaf_purchase_multi_approval.po_approval_level_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="string">PO Approval Actions</attribute>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="amount_from"/>
+                    <field name="amount_to"/>
+                    <field name="currency_id" groups="base.group_multi_currency" options="{'no_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="ejaf_purchase_multi_approval.action_po_approval_level" model="ir.actions.act_window">
+            <field name="name">PO Approval Actions</field>
+            <field name="res_model">po.approval.level</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="ejaf_purchase_multi_approval.po_approval_level_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new PO Approval Action
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="ejaf_purchase_multi_approval.menu_po_approval_level_config" name="PO Approval Actions" parent="purchase.menu_purchase_config"
+        sequence="4" action="ejaf_purchase_multi_approval.action_po_approval_level" groups="ejaf_purchase_multi_approval.group_po_multi_approval_level"/>
+
+    </data>
+</odoo>

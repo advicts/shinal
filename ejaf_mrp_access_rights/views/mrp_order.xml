@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mrp_production_form_view_inherit_access" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//button[@name='action_confirm']" position="before">
+                    <field name="validated" invisible="1"/>
+                     <button name="validate_mrp"
+                            string="Validate"
+                            type="object"
+                            attrs="{'invisible': ['|',('validated','=',True),('state', '!=', 'draft')]}"
+                            groups="ejaf_mrp_access_rights.validate_mrp_order_group"
+                            class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="groups">ejaf_mrp_access_rights.confirm_mrp_order_group</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

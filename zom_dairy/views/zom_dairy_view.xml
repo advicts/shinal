@@ -1,0 +1,61 @@
+<odoo>
+  <data>
+    <record id="res_users_zom_dairy_tree" model="ir.ui.view">
+      <field name="name">zom_dairy Users</field>
+      <field name="model">res.users.zom_dairy</field>
+      <field name="arch" type="xml">
+        <tree string="zom_dairy Users">
+          <field name="user_id" />
+          <field name="name" />
+          <field name="email" />
+          <field name="active" />
+        </tree>
+      </field>
+    </record>
+    <!-- User zom_dairy form view definition -->
+    <record model="ir.ui.view" id="res_users_zom_dairy_from">
+      <field name="name">zom_dairy Users</field>
+      <field name="model">res.users.zom_dairy</field>
+      <field name="arch" type="xml">
+        <form string="zom_dairy Users">
+          <header>
+            <button name="action_update_sync" active="1" type="object" string="Synchronize User Data" />
+          </header>
+
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}" />
+              </button>
+            </div>
+            <group>
+              <group>
+                <field name="user_id" />
+                <field name="name" />
+                <field name="collection_center_id" />
+                <field name="cash_journal"/>
+              </group>
+              <group>
+                <field name="email" />
+                <field name="password" password="True" />
+              </group>
+            </group>
+
+
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers" />
+            <field name="message_ids" widget="mail_thread" />
+          </div>
+
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_res_users_zom_dairy">
+      <field name="name">zom_dairy Users</field>
+      <field name="res_model">res.users.zom_dairy</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="res_users_zom_dairy_tree" />
+    </record>
+  </data>
+</odoo>

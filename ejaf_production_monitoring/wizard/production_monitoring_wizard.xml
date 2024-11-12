@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="view_production_monitoring_wizard_form" model="ir.ui.view">
+            <field name="name">production.monitoring.wizard.form</field>
+            <field name="model">production.monitoring.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Production Monitoring Wizard">
+                    <group>
+                        <field name="type_id"/>
+                    </group>
+                    <group>
+                    </group>
+                    <footer>
+                        <button name="add_ticket" string="Create" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="production_monitoring_wizard_action" model="ir.actions.act_window">
+            <field name="name">Production Monitoring</field>
+            <field name="res_model">production.monitoring.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+    </data>
+</odoo>

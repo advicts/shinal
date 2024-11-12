@@ -1,0 +1,93 @@
+<odoo>
+    <data>
+        <record id="vansales_visits_tree" model="ir.ui.view">
+            <field name="name">VanSales Visits</field>
+            <field name="model">vansale.visit</field>
+            <field name="arch" type="xml">
+                <tree string="Visits">
+                    <field name="name" />
+                    <field name="partner_id" />
+                    <field name="date" />
+                </tree>
+            </field>
+        </record>
+        <!-- User VanSales form view definition -->
+        <record model="ir.ui.view" id="vansales_visits_from">
+            <field name="name">Visits</field>
+            <field name="model">vansale.visit</field>
+            <field name="arch" type="xml">
+                <form string="Visits">
+
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id" />
+                                <field name="date" />
+
+                            </group>
+                            <group>
+                                <field name="note" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Vansales Info" name="vansales_information">
+                            <group string="Visit Reference">
+                              <field name="vansales_ref" />
+                            </group>
+                            <group string="Order Geo Location">
+                              <field name="partner_latitude" />
+                              <field name="partner_longitude" />
+                            </group>
+                        </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_visits_google_map" model="ir.ui.view">
+            <field name="name">view.visits.google_map</field>
+            <field name="model">vansale.visit</field>
+            <field name="arch" type="xml">
+              <google_map class="o_res_partner_google_map" library="geometry" string="Map" lat="partner_latitude" lng="partner_longitude" color="orange">
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="partner_longitude" />
+                <field name="partner_latitude" />
+                <field name="date" />
+                <templates>
+                  <t t-name="kanban-box">
+                    <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                      <div class="o_kanban_record_top mb16">
+                        <div class="o_kanban_record_headings mt4">
+                          <strong class="o_kanban_record_title">
+                            <span>
+                              <t t-esc="record.partner_id.value" />
+                            </span>
+                          </strong>
+                        </div>
+                        <strong>
+                          <field name="date" />
+                        </strong>
+                      </div>
+                   
+                    </div>
+                  </t>
+                </templates>
+              </google_map>
+            </field>
+          </record>
+      
+        <record model="ir.actions.act_window" id="action_vansales_visits">
+            <field name="name">Visits</field>
+            <field name="res_model">vansale.visit</field>
+            <field name="view_mode">tree,form,google_map</field>
+            <field name="view_id" ref="vansales_visits_tree" />
+        </record>
+    </data>
+</odoo>

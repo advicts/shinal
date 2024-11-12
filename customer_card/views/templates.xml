@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report id="customer_card.customer_card_report" model="res.partner" name="customer_card.customer_qr_template"
+                file="customer_card.customer_qr_template" string="Customer Crad" report_type="qweb-pdf"/>
+        <record id="customer_card.customer_card_report" model="ir.actions.report">
+            <field name="paperformat_id" ref="customer_card.customer_card_paperformat"/>
+        </record>
+
+        <template id="customer_qr_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="record">
+                    <t t-call="web.basic_layout">
+                        <style>
+                            table{
+                            border:2px solid black !important;
+                            width:400px;
+                            height:190px;
+                            }
+                            tr{
+                            border:1px solid black !important;
+                            }
+                            td{
+                            border:0px solid black !important;
+                            font-size:16px;
+                            }
+                        </style>
+                        <div class="page">
+                            <center>
+                                <table>
+                                    <tr>
+                                        <td style="width:150px;text-align:center;vertical-align: middle;" rowspan="3">
+                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR',str({'id':record.id,'name':record.name,'phone':str(record.phone),'mobile':str(record.mobile)}), 600, 50)"
+                                                 style="width:120px;height:120px;"/>
+                                        </td>
+                                        <td style="text-align:center;vertical-align: middle; font-size:18px;">
+                                            <span t-esc="record.name" style="float:center;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle; ">
+                                            <span t-if="record.phone" t-esc="record.phone" style="float:center;"/>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle;">
+                                            <span t-if="record.mobile" t-esc="record.mobile" style="float:center;"/>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

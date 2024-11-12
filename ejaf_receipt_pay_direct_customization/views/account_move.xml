@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="account_move_view_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.form.view.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field  name="rel_cust_invoice_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//button[@name='preview_invoice']" position="before">
+                    <button name="add_vendor_receipt" type="object" string="Create Vendor Receipt"
+                                attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}"/>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="open_vendor_receipt" type="object"
+                            class="oe_stat_button" icon="fa-bars"
+                            attrs="{'invisible': [('receipts_count','=', 0)]}">
+                        <field name="receipts_count"/>
+                        <span>Vendor receipts</span>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <menuitem id="menu_action_move_in_receipt_type" name="Vendor Receipts" action="account.action_move_in_receipt_type" groups="account.group_purchase_receipts" parent="account_accountant.menu_accounting" sequence="10"/>
+    </data>
+</odoo>
