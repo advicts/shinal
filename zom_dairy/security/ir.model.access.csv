@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_res_users_zom_dairy,res.users.zom_dairy,model_res_users_zom_dairy,zom_dairy.access_zom_module_group_manger,1,1,1,0
-access_collection_center,collection.center,model_collection_center,zom_dairy.access_zom_module_group_manger,1,1,1,0
-access_partner_zone,partner.zone,model_partner_zone,zom_dairy.access_zom_module_group_manger,1,1,1,1

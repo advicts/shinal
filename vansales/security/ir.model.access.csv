@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_res_users_vansales,res.users.vansales,model_res_users_vansales,sales_team.group_sale_manager,1,1,1,0
-access_vansale_visit,vansale.visit,model_vansale_visit,sales_team.group_sale_manager,1,1,1,0
-access_res_users_vansales_user,res.users.vansales.user,model_res_users_vansales,vansales.vansale_user_group,1,1,1,0
-access_vansale_visit_user,vansale.visit.user,model_vansale_visit,vansales.vansale_user_group,1,1,1,0

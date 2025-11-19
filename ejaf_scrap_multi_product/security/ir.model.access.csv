@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_scrap_multi_product,scrap.multi.product,model_scrap_multi_product,,1,1,1,1
-access_scrap_multi_product_line,scrap.multi.product.line,model_scrap_multi_product_line,,1,1,1,1

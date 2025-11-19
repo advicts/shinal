@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+
+
+        <record id="inherit_account_payment_form_inherit" model="ir.ui.view">
+            <field name="name">account.payment.view.form.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='amount']" position="after">
+                    <field name="is_intercompany_transfer" readonly='(state != "draft")'/>
+                </xpath>
+
+                <xpath expr="//group[@name='group2']/field[@name='partner_bank_id'][1]" position="replace">
+                    <field name="partner_bank_id" string="Customer Bank Account"
+                           context="{'default_partner_id': partner_id, 'display_account_trust': True}"
+                           invisible="not show_partner_bank_account or partner_type != 'customer' or payment_type == 'inbound' or is_intercompany_transfer"
+                           required="require_partner_bank_account"/>
+                </xpath>
+
+                <xpath expr="//group[@name='group2']/field[@name='partner_bank_id'][2]" position="replace">
+                    <field name="partner_bank_id" string="Vendor Bank Account"
+                           context="{'default_partner_id': partner_id, 'display_account_trust': True}"
+                           invisible="not show_partner_bank_account or partner_type != 'supplier' or payment_type == 'inbound' or is_intercompany_transfer"
+                           required="require_partner_bank_account"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="res_company_view_form_inherit" model="ir.ui.view">
+            <field name="name">res.company.view.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form" />
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="journal_code"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
